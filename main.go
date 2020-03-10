@@ -37,7 +37,6 @@ func streamHandler(response http.ResponseWriter, request *http.Request) {
 	if !ok {
 		mediaBase := getMediaBase(mId)
 		m3u8Name := "index.m3u8"
-		fmt.Println(mediaBase)
 		serveHlsM3u8(response, request, mediaBase, m3u8Name)
 	} else {
 		mediaBase := getMediaBase(mId)

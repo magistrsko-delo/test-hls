@@ -15,6 +15,7 @@ func main() {
 func handlers() *mux.Router {
 	router := mux.NewRouter()
 	router.HandleFunc("/", indexPage).Methods("GET")
+	router.HandleFunc("/hls.js", hls).Methods("GET")
 	router.HandleFunc("/media/{mId:[0-9]+}/stream/", streamHandler).Methods("GET")
 	router.HandleFunc("/media/{mId:[0-9]+}/stream/{segName:index[0-9]+.ts}", streamHandler).Methods("GET")
 	return router
@@ -22,6 +23,10 @@ func handlers() *mux.Router {
 
 func indexPage(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "index.html")
+}
+
+func hls(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "hls.js")
 }
 
 func streamHandler(response http.ResponseWriter, request *http.Request) {

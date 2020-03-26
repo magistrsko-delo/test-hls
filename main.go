@@ -17,7 +17,7 @@ func handlers() *mux.Router {
 	router.HandleFunc("/", indexPage).Methods("GET")
 	router.HandleFunc("/hls.js", hls).Methods("GET")
 	router.HandleFunc("/media/{mId:[0-9]+}/stream/", streamHandler).Methods("GET")
-	router.HandleFunc("/media/{mId:[0-9]+}/stream/{segName:index[0-9]+.ts}", streamHandler).Methods("GET")
+	router.HandleFunc("/media/{mId:[0-9]+}/stream/{segName:720p_[0-9]+.ts}", streamHandler).Methods("GET")
 	return router
 }
 
@@ -41,7 +41,7 @@ func streamHandler(response http.ResponseWriter, request *http.Request) {
 	segName, ok := vars["segName"]
 	if !ok {
 		mediaBase := getMediaBase(mId)
-		m3u8Name := "index.m3u8"
+		m3u8Name := "720p.m3u8"
 		serveHlsM3u8(response, request, mediaBase, m3u8Name)
 	} else {
 		mediaBase := getMediaBase(mId)
